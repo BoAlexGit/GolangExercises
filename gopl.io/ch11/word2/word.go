@@ -1,9 +1,8 @@
 // Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
 // License: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
+// word2.go
 // See page 305.
-//!+
-
+//!+ Пакет word предоставляет утилиты для игр со словами,
 // Package word provides utilities for word games.
 package word
 

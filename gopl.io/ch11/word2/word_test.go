@@ -1,6 +1,8 @@
 // Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
 // License: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
+// word_test_2.go
+// Мы также напишем более всеобъемлющий набор тестовых примеров, который со­
+//бирает все предыдущие тестовые примеры и ряд новых в одну таблицу:
 package word
 
 import (
