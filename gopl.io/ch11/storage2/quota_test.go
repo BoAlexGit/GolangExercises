@@ -1,6 +1,9 @@
 // Copyright © 2016 Alan A. A. Donovan & Brian W. Kernighan.
 // License: https://creativecommons.org/licenses/by-nc-sa/4.0/
-
+// quota_test2.go
+// Тест, который заменяет отправление электронной почты
+// функцией простого уведомления, которая просто регистрирует уведомляемого
+//пользователя и содержимое сообщения:
 //!+test
 package storage
 
@@ -36,12 +39,21 @@ func TestCheckQuotaNotifiesUser(t *testing.T) {
 //!-test
 
 /*
+// Имеется одна проблема: после возврата из тестовой функции CheckQuota
+// больше не работает так, как надо, потому что все еще использует поддельную
+// тестовуюреализацию notifyUsers. (При обновлении глобальных переменных
+// всегда имеется риск такого рода.) Мы должны изменить тест, чтобы
+// он восстанавливал предыдущее значение так, чтобы последующие тесты
+// не наблюдали никакой замены, и должны сделать это на всех путях выполнения,
+// включая сбои и аварийные ситуации в тестах.
+// Это естественным образом приводит к применению defer.
 //!+defer
 func TestCheckQuotaNotifiesUser(t *testing.T) {
 	// Save and restore original notifyUser.
 	saved := notifyUser
 	defer func() { notifyUser = saved }()
 
+// Установка поддельной функции для notifyUser.
 	// Install the test's fake notifyUser.
 	var notifiedUser, notifiedMsg string
 	notifyUser = func(user, msg string) {
